@@ -10,23 +10,41 @@ import { classes } from "@/lib/classes";
 const FeaturedClassSlider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    if (isHovered) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (isHovered || !isMounted) return;
 
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev === classes.length - 1 ? 0 : prev + 1));
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [isHovered]);
+  }, [isHovered, isMounted]);
 
   const currentClass = classes[currentIndex];
 
+  if (!isMounted) {
+    return (
+      <div className="min-h-dvh w-full max-w-full box-border grid content-end items-center relative px-4 md:px-10 lg:px-12 xl:px-22 2xl:px-[12vw] py-6 md:py-8">
+        {/* Overlay */}
+        <div className="absolute inset-0 z-20 bg-linear-to-r from-black/90 via-black/50 to-black/0 md:bg-linear-to-tr" />
+
+        {/* Categories */}
+        <div className="relative z-40 max-w-full box-border">
+          <SliderCategories />
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div
-      className={`min-h-dvh w-full grid content-end items-center relative px-4 py-6 md:py-8`}
-    >
+    <div className="min-h-dvh w-full max-w-full box-border grid content-end items-center relative px-4 md:px-10 lg:px-12 xl:px-22 2xl:px-[12vw] py-6 md:py-8">
       {/* Slides */}
       {classes.map((cls, index) => (
         <div
@@ -43,13 +61,13 @@ const FeaturedClassSlider = () => {
       ))}
 
       {/* Overlay */}
-      <div className="absolute inset-0 z-20 bg-linear-to-r from-black/90 via-black/50 to-black/0 md:bg-linear-to-tr" />
+      <div className="absolute inset-0 z-20 bg-linear-to-r from-black/90 via-black/50 to-black/0 md:bg-linear-to-tr w-full" />
 
       {/* Class info */}
       <div
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        className={`relative z-40 flex flex-col self-end gap-2.5 box-border max-w-full mb-[10vh] md:mb-[15vh]`}
+        className="relative z-40 flex flex-col self-end gap-2.5 box-border max-w-full mb-[10vh] md:mb-[15vh]"
       >
         <div className="flex items-center gap-2">
           {currentClass.tags.map((tag, idx) => (
@@ -91,9 +109,7 @@ const FeaturedClassSlider = () => {
       </div>
 
       {/* Categories */}
-      <div className="relative z-40 max-w-full">
-        <SliderCategories />
-      </div>
+      <SliderCategories />
     </div>
   );
 };
