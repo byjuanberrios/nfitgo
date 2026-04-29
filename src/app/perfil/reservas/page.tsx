@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { LayoutGrid, Info } from "lucide-react";
 import BookingCard from "@/components/shared/BookingCard";
-import { bookings } from "@/lib/bookings";
+import { bookings } from "@/data/bookings";
 
 import { BookingStatus } from "@/types";
 

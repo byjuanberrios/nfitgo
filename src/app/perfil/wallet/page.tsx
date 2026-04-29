@@ -1,5 +1,5 @@
 import { Wallet } from "lucide-react";
-import { walletBalance, walletTransactions } from "@/lib/bookings";
+import { walletBalance, walletTransactions } from "@/data/bookings";
 
 const statusStyles: Record<string, string> = {
   pending: "bg-tag-gray text-white/80",

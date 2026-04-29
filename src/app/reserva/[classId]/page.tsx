@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { CalendarDays, Clock } from "lucide-react";
-import { classes } from "@/lib/classes";
-import { categories } from "@/lib/categories";
+import { classes } from "@/data/classes";
+import { categories } from "@/data/categories";
 import { formatScheduleDateLong } from "@/lib/dateUtils";
 import { ClassItem, ClassSchedule, CategoryItem } from "@/types";
 import CheckoutForm from "@/components/CheckoutForm";

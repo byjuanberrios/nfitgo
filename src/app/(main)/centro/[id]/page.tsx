@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { MapPin, Mail, ExternalLink, Star } from "lucide-react";
-import { sportCenters } from "@/lib/sportcenters";
-import { classes } from "@/lib/classes";
+import { sportCenters } from "@/data/sportcenters";
+import { classes } from "@/data/classes";
 import Tag from "@/components/shared/Tag";
 import ClassCard from "@/components/shared/ClassCard";
 

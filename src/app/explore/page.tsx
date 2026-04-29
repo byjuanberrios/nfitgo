@@ -5,8 +5,8 @@ import { useSearchParams } from "next/navigation";
 import { Star } from "lucide-react";
 import ClassCard from "@/components/shared/ClassCard";
 import ExploreFilters from "@/components/ExploreFilters";
-import { classes } from "@/lib/classes";
-import { categories } from "@/lib/categories";
+import { classes } from "@/data/classes";
+import { categories } from "@/data/categories";
 
 const PAGE_SIZE = 8;
 

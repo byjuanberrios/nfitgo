@@ -2,8 +2,8 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { CalendarDays, Clock, CreditCard } from "lucide-react";
-import { classes } from "@/lib/classes";
-import { categories } from "@/lib/categories";
+import { classes } from "@/data/classes";
+import { categories } from "@/data/categories";
 import { formatScheduleDateLong } from "@/lib/dateUtils";
 
 const TRANSACTION_FEE = 200;

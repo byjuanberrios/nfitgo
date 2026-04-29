@@ -12,8 +12,8 @@ import {
   LayoutList,
   X,
 } from "lucide-react";
-import { classes } from "@/lib/classes";
-import { categories } from "@/lib/categories";
+import { classes } from "@/data/classes";
+import { categories } from "@/data/categories";
 import Tag from "@/components/shared/Tag";
 import ClassCard from "@/components/shared/ClassCard";
 import SchedulePicker from "@/components/SchedulePicker";

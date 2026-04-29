@@ -5,7 +5,7 @@ import { MapPin } from "lucide-react";
 import Button from "@/components/shared/Button";
 import Tag from "@/components/shared/Tag";
 import SliderCategories from "./SliderCategories";
-import { classes } from "@/lib/classes";
+import { classes } from "@/data/classes";
 
 const FeaturedClassSlider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);

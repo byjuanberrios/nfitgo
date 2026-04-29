@@ -5,7 +5,7 @@ import Button from "@/components/shared/Button";
 import ClassCard from "@/components/shared/ClassCard";
 import { Star } from "lucide-react";
 
-import { classes } from "@/lib/classes";
+import { classes } from "@/data/classes";
 
 const LatestClassesSlider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
