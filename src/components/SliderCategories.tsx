@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
-import { categories } from "@/lib/categories";
+import { categories } from "@/data/categories";
 import CategoryButton from "@/components/shared/CategoryButton";
 
 const SliderCategories = () => {

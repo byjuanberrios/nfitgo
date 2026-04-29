@@ -9,7 +9,7 @@ import {
   X,
 } from "lucide-react";
 import CategoryButton from "@/components/shared/CategoryButton";
-import { categories } from "@/lib/categories";
+import { categories } from "@/data/categories";
 
 import { ExploreFiltersProps } from "@/types";
 
