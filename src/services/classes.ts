@@ -8,30 +8,21 @@ export interface GetClassesFilters {
 }
 
 export async function getClasses(
-  filters: GetClassesFilters = {}
+  filters: GetClassesFilters = {},
 ): Promise<ClassItem[]> {
-  const params = new URLSearchParams();
+  let result = classes;
 
   if (filters.category) {
-    params.set("category", filters.category);
+    result = result.filter((c) => c.category === filters.category);
   }
   if (filters.commune) {
-    params.set("commune", filters.commune);
+    result = result.filter((c) => c.sportCenter.commune === filters.commune);
   }
   if (filters.sportCenterId) {
-    params.set("sportCenterId", filters.sportCenterId);
+    result = result.filter((c) => c.sportCenter.id === filters.sportCenterId);
   }
 
-  const query = params.toString();
-  const response = await fetch(`/api/classes${query ? `?${query}` : ""}`, {
-    cache: "no-store",
-  });
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch classes");
-  }
-
-  return (await response.json()) as ClassItem[];
+  return result;
 }
 
 export async function getClassById(id: number): Promise<ClassItem | null> {

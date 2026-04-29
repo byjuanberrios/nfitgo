@@ -1,4 +1,4 @@
-import HeaderWrapper from "@/components/HeaderWrapper";
+import Header from "@/parts/Header";
 import Footer from "@/parts/Footer";
 
 export default function ReservaLayout({
@@ -8,7 +8,7 @@ export default function ReservaLayout({
 }) {
   return (
     <>
-      <HeaderWrapper variant="solid" />
+      <Header variant="solid" />
       <main className="flex-1">{children}</main>
       <Footer />
     </>

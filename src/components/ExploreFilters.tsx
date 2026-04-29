@@ -21,17 +21,25 @@ const FilterContent = ({
     {/* Category grid */}
     <div>
       <div className="grid grid-cols-3 gap-2">
-        {cats.map((cat) => (
-          <CategoryButton
-            key={cat.id}
-            category={cat}
-            size="sm"
-            isActive={selectedCategory === cat.id}
-            onClick={() =>
-              onSelectCategory(selectedCategory === cat.id ? null : cat.id)
-            }
-          />
-        ))}
+        {cats.map((cat) => {
+          const isActive = selectedCategory === cat.id;
+          const href = isActive ? "/explore" : `/explore?category=${cat.id}`;
+
+          return (
+            <CategoryButton
+              key={cat.id}
+              category={cat}
+              size="sm"
+              isActive={isActive}
+              onClick={
+                onSelectCategory
+                  ? () => onSelectCategory(isActive ? null : cat.id)
+                  : undefined
+              }
+              href={!onSelectCategory ? href : undefined}
+            />
+          );
+        })}
       </div>
     </div>
 

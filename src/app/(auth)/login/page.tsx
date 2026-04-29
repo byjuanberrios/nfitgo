@@ -23,7 +23,7 @@ export default function LoginPage() {
         name: email.split("@")[0],
       });
       setIsLoading(false);
-      router.push("/");
+      router.push("/profile/reservas");
     }, 1000);
   };
 

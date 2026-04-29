@@ -75,7 +75,7 @@ export interface Booking {
   id: number;
   cls: ClassItem;
   bookedDate: string; // YYYY-MM-DD
-  time: string;       // HH:MM
+  time: string; // HH:MM
   status: BookingStatus;
 }
 
@@ -150,7 +150,7 @@ export interface CategoryButtonProps {
 
 export interface ExploreFiltersProps {
   selectedCategory: number | null;
-  onSelectCategory: (id: number | null) => void;
+  onSelectCategory?: (id: number | null) => void;
 }
 
 export interface SchedulePickerProps {

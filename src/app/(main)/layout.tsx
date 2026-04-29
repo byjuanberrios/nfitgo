@@ -1,4 +1,4 @@
-import HeaderWrapper from "@/components/HeaderWrapper";
+import Header from "@/parts/Header";
 import Footer from "@/parts/Footer";
 
 export default function MainLayout({
@@ -8,7 +8,7 @@ export default function MainLayout({
 }) {
   return (
     <>
-      <HeaderWrapper variant="transparent" />
+      <Header variant="transparent" />
       <main className="flex-1">{children}</main>
       <Footer />
     </>
