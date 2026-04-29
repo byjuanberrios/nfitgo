@@ -10,12 +10,7 @@ import { classes } from "@/lib/classes";
 const FeaturedClassSlider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setIsMounted(true);
-  }, []);
+  const [isMounted, setIsMounted] = useState(true);
 
   useEffect(() => {
     if (isHovered || !isMounted) return;
@@ -67,29 +62,33 @@ const FeaturedClassSlider = () => {
       <div
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        className="relative z-40 flex flex-col self-end gap-2.5 box-border max-w-full mb-[10vh] md:mb-[15vh]"
+        className="relative z-40 flex flex-col self-end gap-3.5 box-border max-w-full mb-[10vh] md:mb-[15vh]"
       >
         <div className="flex items-center gap-2">
-          {currentClass.tags.map((tag, idx) => (
+          {currentClass.tags.slice(0, 2).map((tag, idx) => (
             <Tag key={idx} tag={tag} />
           ))}
+          {currentClass.tags.length > 2 && (
+            <Tag tag={`+${currentClass.tags.length - 2}`} />
+          )}
         </div>
-        <div className="flex flex-col gap-2 mb-1.5">
-          <h2 className="font-semibold text-white text-3xl md:text-4xl">
+        <div className="flex flex-col gap-3 mb-1.5">
+          <h2 className="font-semibold text-white text-3xl lg:text-5xl truncate">
             {currentClass.name}
           </h2>
-          <p className="text-sm md:text-base text-white/90 max-w-[34ch] md:max-w-[42ch]">
+          {/* <p className="text-sm md:text-base text-white/90 max-w-[34ch] md:max-w-[42ch]">
             {currentClass.description}
-          </p>
+          </p> */}
           <div className="flex gap-1.5 text-white/60 text-sm items-center">
             <MapPin size={16} className="text-brand-secondary" />
             <span>
-              {currentClass.sportCentar} - {currentClass.commune}
+              {currentClass.sportCenter.name} -{" "}
+              {currentClass.sportCenter.commune}
             </span>
           </div>
         </div>
         <div>
-          <Button link="/workout" text="Ver clase" />
+          <Button link={`/clase/${currentClass.id}`} text="Ver clase" />
         </div>
         {/* Pagination */}
         <div className="flex gap-2 pt-5">

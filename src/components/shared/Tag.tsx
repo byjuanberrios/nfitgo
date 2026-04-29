@@ -1,7 +1,16 @@
-const Tag = ({ tag }: { tag: string }) => {
+const Tag = ({ tag, color }: { tag: string; color?: string }) => {
+  const colorMap: Record<string, string> = {
+    "brand-primary": "bg-brand-primary text-black",
+    "brand-secondary": "bg-brand-secondary text-black",
+  };
+
   return (
-    <div className="bg-tag-gray text-white rounded-full px-2.5 py-0.5 inline-block">
-      <span className="text-xs tracking-tight">{tag}</span>
+    <div
+      className={`${color ? colorMap[color] || `bg-[var(--color-${color})] text-black` : "bg-tag-gray text-white"} rounded-full px-2 py-1.5 flex first-letter:uppercase`}
+    >
+      <span className="text-[10px] lg:text-xs tracking-tight font-medium">
+        {tag}
+      </span>
     </div>
   );
 };

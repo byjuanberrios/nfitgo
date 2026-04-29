@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx next *)",
+      "Bash(pnpm build *)",
+      "Bash(pnpm lint *)",
+      "Bash(pnpm dev *)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(curl -s http://localhost:3000)",
+      "Bash(curl -s http://localhost:3000/login)",
+      "Bash(curl -s http://localhost:3000/registro)",
+      "Bash(curl -s http://localhost:3000/onboarding)",
+      "Bash(curl -I http://localhost:3000/onboarding)",
+      "Bash(kill 71118)"
+    ],
+    "additionalDirectories": [
+      "/tmp"
+    ]
+  }
+}
