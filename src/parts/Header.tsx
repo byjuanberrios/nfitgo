@@ -29,7 +29,7 @@ const Header = ({ variant = "transparent", user }: HeaderProps) => {
   const mobileLinks = user
     ? [
         ...navLinks.slice(1),
-        { label: "Mi perfil", href: "/perfil/reservas" },
+        { label: "Mi perfil", href: "/profile/reservas" },
         { label: "Cerrar sesión", href: "/login" },
       ]
     : [...navLinks.slice(1), ...authLinks];
@@ -69,7 +69,7 @@ const Header = ({ variant = "transparent", user }: HeaderProps) => {
 
           {user ? (
             <Link
-              href="/perfil/reservas"
+              href="/profile/reservas"
               className="hidden md:flex items-center gap-3 group"
             >
               <div className="text-right">

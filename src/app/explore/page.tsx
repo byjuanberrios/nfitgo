@@ -18,10 +18,12 @@ export default function ExplorePage() {
   const [cats, setCats] = useState<CategoryItem[]>([]);
 
   useEffect(() => {
-    Promise.all([getClasses(), getCategories()]).then(([fetchedCls, fetchedCats]) => {
-      setClsData(fetchedCls);
-      setCats(fetchedCats);
-    });
+    Promise.all([getClasses(), getCategories()]).then(
+      ([fetchedCls, fetchedCats]) => {
+        setClsData(fetchedCls);
+        setCats(fetchedCats);
+      },
+    );
   }, []);
 
   useEffect(() => {
@@ -70,7 +72,7 @@ export default function ExplorePage() {
           {/* Class grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 lg:gap-4">
             {visible.map((cls) => (
-              <ClassCard key={cls.id} cls={cls} href={`/clase/${cls.id}`} />
+              <ClassCard key={cls.id} cls={cls} href={`/class/${cls.id}`} />
             ))}
           </div>
 

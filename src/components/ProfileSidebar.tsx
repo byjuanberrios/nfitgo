@@ -6,9 +6,9 @@ import { LayoutGrid, Wallet, CircleUser, LogOut } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 
 const sidebarLinks = [
-  { label: "Tus Reservas", href: "/perfil/reservas", icon: LayoutGrid },
-  { label: "Wallet", href: "/perfil/wallet", icon: Wallet },
-  { label: "Cuenta", href: "/perfil/cuenta", icon: CircleUser },
+  { label: "Tus Reservas", href: "/profile/reservas", icon: LayoutGrid },
+  { label: "Wallet", href: "/profile/wallet", icon: Wallet },
+  { label: "Cuenta", href: "/profile/cuenta", icon: CircleUser },
 ];
 
 const ProfileSidebar = () => {

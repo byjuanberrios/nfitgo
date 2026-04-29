@@ -178,7 +178,7 @@ export default async function ExitoPage({
                   ¿Tienes dudas?
                 </a>
                 <Link
-                  href="/perfil/reservas"
+                  href="/profile/reservas"
                   className="px-4 py-2.5 rounded-xl bg-brand-primary text-black text-sm font-semibold hover:bg-brand-primary/90 transition-colors"
                 >
                   Ver reservas

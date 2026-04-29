@@ -6,7 +6,11 @@ import Link from "next/link";
 
 import { CheckoutFormProps } from "@/types";
 
-export default function CheckoutForm({ total, classId, scheduleId }: CheckoutFormProps) {
+export default function CheckoutForm({
+  total,
+  classId,
+  scheduleId,
+}: CheckoutFormProps) {
   const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -15,7 +19,7 @@ export default function CheckoutForm({ total, classId, scheduleId }: CheckoutFor
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    router.push(`/reserva/${classId}/exito?scheduleId=${scheduleId}`);
+    router.push(`/booking/${classId}/exito?scheduleId=${scheduleId}`);
   };
 
   const inputClass =

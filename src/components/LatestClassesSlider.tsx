@@ -68,7 +68,7 @@ const LatestClassesSlider = () => {
             <ClassCard
               key={cls.id}
               cls={cls}
-              href={`/clase/${cls.id}`}
+              href={`/class/${cls.id}`}
               className={`shrink-0 w-60 lg:w-68 snap-center ${
                 index === 0
                   ? "ml-4 md:ml-10 lg:ml-12 xl:ml-22 2xl:ml-[12vw]"

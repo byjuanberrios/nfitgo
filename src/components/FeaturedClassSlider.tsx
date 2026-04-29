@@ -91,7 +91,7 @@ const FeaturedClassSlider = () => {
           </div>
         </div>
         <div>
-          <Button link={`/clase/${currentClass.id}`} text="Ver clase" />
+          <Button link={`/class/${currentClass.id}`} text="Ver clase" />
         </div>
         {/* Pagination */}
         <div className="flex gap-2 pt-5">

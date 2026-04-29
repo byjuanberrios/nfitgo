@@ -1,7 +1,11 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { MapPin, Mail, ExternalLink, Star } from "lucide-react";
-import { getSportCenters, getSportCenterById, getSportCenterClasses } from "@/services";
+import {
+  getSportCenters,
+  getSportCenterById,
+  getSportCenterClasses,
+} from "@/services";
 import Tag from "@/components/shared/Tag";
 import ClassCard from "@/components/shared/ClassCard";
 
@@ -113,7 +117,7 @@ export default async function SportCenterPage({
               </div>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 lg:gap-4 pb-2 -mx-4 px-4 md:-mx-10 md:px-10 lg:-mx-12 lg:px-12 xl:-mx-22 xl:px-22 2xl:mx-[-12vw] 2xl:px-[12vw]">
                 {scClasses.map((cls) => (
-                  <ClassCard key={cls.id} cls={cls} href={`/clase/${cls.id}`} />
+                  <ClassCard key={cls.id} cls={cls} href={`/class/${cls.id}`} />
                 ))}
               </div>
             </section>

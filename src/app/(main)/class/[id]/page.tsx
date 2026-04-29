@@ -22,7 +22,7 @@ import SchedulePicker from "@/components/SchedulePicker";
 const SportCenterCard = ({ cls }: { cls: ClassItem }) => {
   return (
     <div className="p-4 lg:p-5 flex items-center gap-3 bg-surface-dark rounded-xl">
-      <Link href={`/centro/${cls.sportCenter.id}`}>
+      <Link href={`/sport-center/${cls.sportCenter.id}`}>
         <Image
           src={cls.sportCenter.image}
           alt={cls.sportCenter.name}
@@ -33,7 +33,7 @@ const SportCenterCard = ({ cls }: { cls: ClassItem }) => {
       </Link>
       <div className="min-w-0">
         <Link
-          href={`/centro/${cls.sportCenter.id}`}
+          href={`/sport-center/${cls.sportCenter.id}`}
           className="font-semibold text-base lg:text-lg truncate"
         >
           {cls.sportCenter.name}
@@ -50,7 +50,7 @@ const ReservationPanel = ({ cls }: { cls: ClassItem }) => {
   const [selectedId, setSelectedId] = useState<number>(
     cls.schedules?.[0]?.id ?? -1,
   );
-  const checkoutHref = `/reserva/${cls.id}?scheduleId=${selectedId}`;
+  const checkoutHref = `/booking/${cls.id}?scheduleId=${selectedId}`;
 
   return (
     <div className="lg:px-5 lg:py-7 grid gap-5 bg-surface-dark rounded-xl">
@@ -251,7 +251,7 @@ const ClassDetailPage = () => {
                       <ClassCard
                         key={other.id}
                         cls={other}
-                        href={`/clase/${other.id}`}
+                        href={`/class/${other.id}`}
                       />
                     ))}
                   </div>
