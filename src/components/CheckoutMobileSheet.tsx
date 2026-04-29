@@ -4,17 +4,13 @@ import { useState, useEffect } from "react";
 import { X } from "lucide-react";
 import CheckoutForm from "@/components/CheckoutForm";
 
-type Props = {
-  total: number;
-  classId: number;
-  scheduleId: number;
-};
+import { CheckoutMobileSheetProps } from "@/types";
 
 export default function CheckoutMobileSheet({
   total,
   classId,
   scheduleId,
-}: Props) {
+}: CheckoutMobileSheetProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {

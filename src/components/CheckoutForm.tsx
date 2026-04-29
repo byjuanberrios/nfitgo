@@ -4,13 +4,9 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-type Props = {
-  total: number;
-  classId: number;
-  scheduleId: number;
-};
+import { CheckoutFormProps } from "@/types";
 
-export default function CheckoutForm({ total, classId, scheduleId }: Props) {
+export default function CheckoutForm({ total, classId, scheduleId }: CheckoutFormProps) {
   const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");

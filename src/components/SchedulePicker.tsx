@@ -1,16 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { ClassSchedule } from "@/types";
+import { SchedulePickerProps } from "@/types";
 import { formatScheduleDate } from "@/lib/dateUtils";
 
-type Props = {
-  schedules: ClassSchedule[];
-  selected?: number;
-  onSelect?: (id: number) => void;
-};
-
-export default function SchedulePicker({ schedules, selected: controlledSelected, onSelect }: Props) {
+export default function SchedulePicker({ schedules, selected: controlledSelected, onSelect }: SchedulePickerProps) {
   const [internalSelected, setInternalSelected] = useState<number>(schedules[0]?.id ?? -1);
 
   const isControlled = controlledSelected !== undefined;

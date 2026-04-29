@@ -9,7 +9,7 @@ import { StepActivities } from "@/components/onboarding/StepActivities";
 import { StepPlan } from "@/components/onboarding/StepPlan";
 import { StepSuccess } from "@/components/onboarding/StepSuccess";
 
-type Billing = "anual" | "mensual";
+import { Billing } from "@/types";
 
 export default function OnboardingPage() {
   const [step, setStep] = useState(0);

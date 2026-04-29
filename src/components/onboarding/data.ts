@@ -1,4 +1,4 @@
-import { IconProps } from "@/types";
+import { IconProps, OnboardingActivity, PlanItem } from "@/types";
 import MusculationIcon from "@/components/icons/Musculation";
 import YogaIcon from "@/components/icons/Yoga";
 import PilatesIcon from "@/components/icons/Pilates";
@@ -42,13 +42,7 @@ export const CENTRO_TIPOS = [
   "Otro",
 ];
 
-export type Activity = {
-  id: string;
-  label: string;
-  Icon: React.ComponentType<IconProps>;
-};
-
-export const ACTIVITIES: Activity[] = [
+export const ACTIVITIES: OnboardingActivity[] = [
   { id: "musculacion", label: "Musculación", Icon: MusculationIcon },
   { id: "yoga", label: "Yoga", Icon: YogaIcon },
   { id: "pilates", label: "Pilates", Icon: PilatesIcon },
@@ -67,7 +61,7 @@ export const CAPACIDADES = [
   "Más de 500 alumnos",
 ];
 
-export const PLANS = [
+export const PLANS: PlanItem[] = [
   {
     id: "go_pro",
     name: "Go Pro",

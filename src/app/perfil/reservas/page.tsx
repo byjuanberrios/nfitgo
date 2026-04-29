@@ -5,10 +5,10 @@ import { LayoutGrid, Info } from "lucide-react";
 import BookingCard from "@/components/shared/BookingCard";
 import { bookings } from "@/lib/bookings";
 
-type Tab = "upcoming" | "past";
+import { BookingStatus } from "@/types";
 
 export default function ReservasPage() {
-  const [activeTab, setActiveTab] = useState<Tab>("upcoming");
+  const [activeTab, setActiveTab] = useState<BookingStatus>("upcoming");
 
   const filtered = bookings.filter((b) => b.status === activeTab);
 

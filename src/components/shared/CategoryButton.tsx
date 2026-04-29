@@ -1,14 +1,5 @@
-import { CategoryItem } from "@/types";
+import { CategoryButtonProps } from "@/types";
 import Link from "next/link";
-
-interface CategoryButtonProps {
-  category: CategoryItem;
-  isActive?: boolean;
-  onClick?: () => void;
-  size?: "sm" | "md";
-  className?: string;
-  href?: string;
-}
 
 const CategoryButton = ({
   category,

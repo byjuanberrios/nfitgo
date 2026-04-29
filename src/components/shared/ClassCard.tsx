@@ -1,14 +1,8 @@
 import Link from "next/link";
 import Tag from "@/components/shared/Tag";
 import { ClockFading, MapPin, Users } from "lucide-react";
-import { ClassItem } from "@/types";
+import { ClassCardProps } from "@/types";
 import { formatDate } from "@/lib/dateUtils";
-
-type ClassCardProps = {
-  cls: ClassItem;
-  className?: string;
-  href?: string;
-};
 
 const ClassCard = ({ cls, className = "", href }: ClassCardProps) => {
   const { day, month } = formatDate(cls.date);

@@ -1,14 +1,7 @@
 import Tag from "@/components/shared/Tag";
 import { Clock, ClockFading, MapPin } from "lucide-react";
-import { Booking } from "@/types";
+import { BookingCardProps } from "@/types";
 import { formatDate } from "@/lib/dateUtils";
-
-type BookingCardProps = {
-  booking: Booking;
-  showTags?: boolean;
-  isPast?: boolean;
-  className?: string;
-};
 
 const BookingCard = ({
   booking,

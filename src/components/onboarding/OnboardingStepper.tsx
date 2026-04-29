@@ -1,3 +1,5 @@
+import { OnboardingStepperProps } from "@/types";
+
 export const ONBOARDING_STEPS = [
   "¡Bienvenido!",
   "Datos de contacto",
@@ -5,10 +7,6 @@ export const ONBOARDING_STEPS = [
   "Actividades y operación",
   "Seleccionar plan",
 ];
-
-interface OnboardingStepperProps {
-  currentStep: number;
-}
 
 export default function OnboardingStepper({
   currentStep,

@@ -11,10 +11,7 @@ import {
 import CategoryButton from "@/components/shared/CategoryButton";
 import { categories } from "@/lib/categories";
 
-interface ExploreFiltersProps {
-  selectedCategory: number | null;
-  onSelectCategory: (id: number | null) => void;
-}
+import { ExploreFiltersProps } from "@/types";
 
 const FilterContent = ({
   selectedCategory,

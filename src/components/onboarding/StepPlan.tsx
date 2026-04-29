@@ -1,7 +1,6 @@
+import { Billing, PlanItem } from "@/types";
 import { Header, NavButtons } from "./ui";
 import { PLANS } from "./data";
-
-type Billing = "anual" | "mensual";
 
 function formatPrice(n: number) {
   return `$${n.toLocaleString("es-CL")}`;
@@ -14,7 +13,7 @@ function PlanCard({
   onSelect,
   className = "",
 }: {
-  plan: (typeof PLANS)[0];
+  plan: PlanItem;
   billing: Billing;
   selected: boolean;
   onSelect: () => void;

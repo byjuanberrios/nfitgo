@@ -1,14 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { HeaderUser } from "@/types";
-
-type AuthContextType = {
-  user: HeaderUser | null;
-  isLoading: boolean;
-  login: (user: HeaderUser) => void;
-  logout: () => void;
-};
+import { HeaderUser, AuthContextType } from "@/types";
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
