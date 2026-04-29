@@ -5,26 +5,30 @@ import { MapPin } from "lucide-react";
 import Button from "@/components/shared/Button";
 import Tag from "@/components/shared/Tag";
 import SliderCategories from "./SliderCategories";
-import { classes } from "@/data/classes";
+import { getClasses } from "@/services";
+import type { ClassItem } from "@/types";
 
 const FeaturedClassSlider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const [isMounted, setIsMounted] = useState(true);
+  const [clsData, setClsData] = useState<ClassItem[]>([]);
 
   useEffect(() => {
-    if (isHovered || !isMounted) return;
+    getClasses().then(setClsData);
+  }, []);
+
+  useEffect(() => {
+    if (isHovered || !isMounted || clsData.length === 0) return;
 
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev === classes.length - 1 ? 0 : prev + 1));
+      setCurrentIndex((prev) => (prev === clsData.length - 1 ? 0 : prev + 1));
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [isHovered, isMounted]);
+  }, [isHovered, isMounted, clsData.length]);
 
-  const currentClass = classes[currentIndex];
-
-  if (!isMounted) {
+  if (!isMounted || clsData.length === 0) {
     return (
       <div className="min-h-dvh w-full max-w-full box-border grid content-end items-center relative px-4 md:px-10 lg:px-12 xl:px-22 2xl:px-[12vw] py-6 md:py-8">
         {/* Overlay */}
@@ -38,10 +42,12 @@ const FeaturedClassSlider = () => {
     );
   }
 
+  const currentClass = clsData[currentIndex];
+
   return (
     <div className="min-h-dvh w-full max-w-full box-border grid content-end items-center relative px-4 md:px-10 lg:px-12 xl:px-22 2xl:px-[12vw] py-6 md:py-8">
       {/* Slides */}
-      {classes.map((cls, index) => (
+      {clsData.map((cls, index) => (
         <div
           key={cls.id}
           className={`absolute inset-0 transition-opacity duration-500 ${
@@ -76,9 +82,6 @@ const FeaturedClassSlider = () => {
           <h2 className="font-semibold text-white text-3xl lg:text-5xl truncate">
             {currentClass.name}
           </h2>
-          {/* <p className="text-sm md:text-base text-white/90 max-w-[34ch] md:max-w-[42ch]">
-            {currentClass.description}
-          </p> */}
           <div className="flex gap-1.5 text-white/60 text-sm items-center">
             <MapPin size={16} className="text-brand-secondary" />
             <span>
@@ -92,7 +95,7 @@ const FeaturedClassSlider = () => {
         </div>
         {/* Pagination */}
         <div className="flex gap-2 pt-5">
-          {classes.map((_, index) => (
+          {clsData.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}

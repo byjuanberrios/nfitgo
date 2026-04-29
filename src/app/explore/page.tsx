@@ -5,8 +5,8 @@ import { useSearchParams } from "next/navigation";
 import { Star } from "lucide-react";
 import ClassCard from "@/components/shared/ClassCard";
 import ExploreFilters from "@/components/ExploreFilters";
-import { classes } from "@/data/classes";
-import { categories } from "@/data/categories";
+import { getClasses, getCategories } from "@/services";
+import type { ClassItem, CategoryItem } from "@/types";
 
 const PAGE_SIZE = 8;
 
@@ -14,6 +14,15 @@ export default function ExplorePage() {
   const searchParams = useSearchParams();
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const [clsData, setClsData] = useState<ClassItem[]>([]);
+  const [cats, setCats] = useState<CategoryItem[]>([]);
+
+  useEffect(() => {
+    Promise.all([getClasses(), getCategories()]).then(([fetchedCls, fetchedCats]) => {
+      setClsData(fetchedCls);
+      setCats(fetchedCats);
+    });
+  }, []);
 
   useEffect(() => {
     const categoryParam = searchParams.get("category");
@@ -30,9 +39,9 @@ export default function ExplorePage() {
 
   const filtered =
     selectedCategory === null
-      ? classes
-      : classes.filter((cls) => {
-          const cat = categories.find((c) => c.id === selectedCategory);
+      ? clsData
+      : clsData.filter((cls) => {
+          const cat = cats.find((c) => c.id === selectedCategory);
           return cat
             ? cls.category.toLowerCase() === cat.name.toLowerCase()
             : true;

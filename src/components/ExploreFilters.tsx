@@ -9,19 +9,19 @@ import {
   X,
 } from "lucide-react";
 import CategoryButton from "@/components/shared/CategoryButton";
-import { categories } from "@/data/categories";
-
-import { ExploreFiltersProps } from "@/types";
+import { getCategories } from "@/services";
+import type { CategoryItem, ExploreFiltersProps } from "@/types";
 
 const FilterContent = ({
   selectedCategory,
   onSelectCategory,
-}: ExploreFiltersProps) => (
+  cats,
+}: ExploreFiltersProps & { cats: CategoryItem[] }) => (
   <>
     {/* Category grid */}
     <div>
       <div className="grid grid-cols-3 gap-2">
-        {categories.map((cat) => (
+        {cats.map((cat) => (
           <CategoryButton
             key={cat.id}
             category={cat}
@@ -82,6 +82,11 @@ const ExploreFilters = ({
   onSelectCategory,
 }: ExploreFiltersProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [cats, setCats] = useState<CategoryItem[]>([]);
+
+  useEffect(() => {
+    getCategories().then(setCats);
+  }, []);
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
@@ -99,6 +104,7 @@ const ExploreFilters = ({
         <FilterContent
           selectedCategory={selectedCategory}
           onSelectCategory={onSelectCategory}
+          cats={cats}
         />
       </aside>
 
@@ -108,7 +114,6 @@ const ExploreFilters = ({
         className="lg:hidden fixed bottom-6 right-4 z-40 flex items-center gap-2 bg-brand-primary text-black font-semibold text-sm px-4 py-3 rounded-full shadow-lg active:scale-95 transition-transform"
       >
         <SlidersHorizontal className="size-5" />
-        {/* Filtrar */}
         {activeCount > 0 && (
           <span className="bg-black/20 rounded-full size-5 flex items-center justify-center text-xs">
             {activeCount}
@@ -145,6 +150,7 @@ const ExploreFilters = ({
           <FilterContent
             selectedCategory={selectedCategory}
             onSelectCategory={onSelectCategory}
+            cats={cats}
           />
         </div>
       </div>

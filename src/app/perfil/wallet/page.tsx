@@ -1,5 +1,5 @@
 import { Wallet } from "lucide-react";
-import { walletBalance, walletTransactions } from "@/data/bookings";
+import { getWalletBalance, getWalletTransactions } from "@/services";
 
 const statusStyles: Record<string, string> = {
   pending: "bg-tag-gray text-white/80",
@@ -11,7 +11,12 @@ const statusLabels: Record<string, string> = {
   reversed: "Reversado",
 };
 
-export default function WalletPage() {
+export default async function WalletPage() {
+  const [walletBalance, walletTransactions] = await Promise.all([
+    getWalletBalance(),
+    getWalletTransactions(),
+  ]);
+
   return (
     <div className="flex flex-col gap-6">
       <div>

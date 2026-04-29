@@ -4,36 +4,41 @@ import { useState, useRef, useEffect } from "react";
 import Button from "@/components/shared/Button";
 import ClassCard from "@/components/shared/ClassCard";
 import { Star } from "lucide-react";
-
-import { classes } from "@/data/classes";
+import { getClasses } from "@/services";
+import type { ClassItem } from "@/types";
 
 const LatestClassesSlider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [totalDots, setTotalDots] = useState(classes.length);
+  const [totalDots, setTotalDots] = useState(0);
+  const [clsData, setClsData] = useState<ClassItem[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    getClasses().then(setClsData);
+  }, []);
+
+  useEffect(() => {
     const container = scrollRef.current;
-    if (!container) return;
+    if (!container || clsData.length === 0) return;
 
     const updateDotCount = () => {
-      const slideWidth = container.scrollWidth / classes.length;
+      const slideWidth = container.scrollWidth / clsData.length;
       const maxScrollLeft = container.scrollWidth - container.clientWidth;
       const reachable = Math.round(maxScrollLeft / slideWidth) + 1;
-      setTotalDots(Math.min(reachable, classes.length));
+      setTotalDots(Math.min(reachable, clsData.length));
     };
 
     updateDotCount();
     const ro = new ResizeObserver(updateDotCount);
     ro.observe(container);
     return () => ro.disconnect();
-  }, []);
+  }, [clsData.length]);
 
   const scrollToIndex = (index: number) => {
     setCurrentIndex(index);
     const container = scrollRef.current;
-    if (!container) return;
-    const slideWidth = container.scrollWidth / classes.length;
+    if (!container || clsData.length === 0) return;
+    const slideWidth = container.scrollWidth / clsData.length;
     container.scrollTo({ left: slideWidth * index, behavior: "smooth" });
   };
 
@@ -52,14 +57,14 @@ const LatestClassesSlider = () => {
           ref={scrollRef}
           onScroll={() => {
             const container = scrollRef.current;
-            if (!container) return;
-            const slideWidth = container.scrollWidth / classes.length;
+            if (!container || clsData.length === 0) return;
+            const slideWidth = container.scrollWidth / clsData.length;
             const index = Math.round(container.scrollLeft / slideWidth);
             setCurrentIndex(index);
           }}
           className="flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-2"
         >
-          {classes.map((cls, index) => (
+          {clsData.map((cls, index) => (
             <ClassCard
               key={cls.id}
               cls={cls}
@@ -69,7 +74,7 @@ const LatestClassesSlider = () => {
                   ? "ml-4 md:ml-10 lg:ml-12 xl:ml-22 2xl:ml-[12vw]"
                   : ""
               } ${
-                index === classes.length - 1
+                index === clsData.length - 1
                   ? "mr-4 md:mr-10 lg:mr-12 xl:mr-22 2xl:mr-[12vw]"
                   : ""
               }`}

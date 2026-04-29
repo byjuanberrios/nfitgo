@@ -12,13 +12,14 @@ import {
   LayoutList,
   X,
 } from "lucide-react";
-import { classes } from "@/data/classes";
-import { categories } from "@/data/categories";
+import { getClassById, getCategories } from "@/services";
+import { getSportCenterClasses } from "@/services";
+import type { ClassItem, CategoryItem } from "@/types";
 import Tag from "@/components/shared/Tag";
 import ClassCard from "@/components/shared/ClassCard";
 import SchedulePicker from "@/components/SchedulePicker";
 
-const SportCenterCard = ({ cls }: { cls: (typeof classes)[number] }) => {
+const SportCenterCard = ({ cls }: { cls: ClassItem }) => {
   return (
     <div className="p-4 lg:p-5 flex items-center gap-3 bg-surface-dark rounded-xl">
       <Link href={`/centro/${cls.sportCenter.id}`}>
@@ -35,7 +36,7 @@ const SportCenterCard = ({ cls }: { cls: (typeof classes)[number] }) => {
           href={`/centro/${cls.sportCenter.id}`}
           className="font-semibold text-base lg:text-lg truncate"
         >
-          {cls.sportCenter.name} lero
+          {cls.sportCenter.name}
         </Link>
         <p className="text-xs text-gray-400 mt-0.5 leading-snug">
           {cls.sportCenter.address ?? cls.sportCenter.commune}
@@ -45,7 +46,7 @@ const SportCenterCard = ({ cls }: { cls: (typeof classes)[number] }) => {
   );
 };
 
-const ReservationPanel = ({ cls }: { cls: (typeof classes)[number] }) => {
+const ReservationPanel = ({ cls }: { cls: ClassItem }) => {
   const [selectedId, setSelectedId] = useState<number>(
     cls.schedules?.[0]?.id ?? -1,
   );
@@ -106,6 +107,9 @@ const ReservationPanel = ({ cls }: { cls: (typeof classes)[number] }) => {
 const ClassDetailPage = () => {
   const params = useParams<{ id: string }>();
   const [isOpen, setIsOpen] = useState(false);
+  const [cls, setCls] = useState<ClassItem | null | undefined>(undefined);
+  const [cats, setCats] = useState<CategoryItem[]>([]);
+  const [otherClasses, setOtherClasses] = useState<ClassItem[]>([]);
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
@@ -114,19 +118,28 @@ const ClassDetailPage = () => {
     };
   }, [isOpen]);
 
-  const cls = classes.find((c) => c.id === Number(params.id));
-  if (!cls) notFound();
+  useEffect(() => {
+    const id = Number(params.id);
+    Promise.all([getClassById(id), getCategories()]).then(
+      ([fetchedCls, fetchedCats]) => {
+        setCls(fetchedCls);
+        setCats(fetchedCats);
+        if (fetchedCls) {
+          getSportCenterClasses(fetchedCls.sportCenter.id).then((scClasses) => {
+            setOtherClasses(scClasses.filter((c) => c.id !== id).slice(0, 3));
+          });
+        }
+      },
+    );
+  }, [params.id]);
 
-  const category = categories.find(
+  if (cls === undefined) return null;
+  if (cls === null) notFound();
+
+  const category = cats.find(
     (cat) => cat.name.toLowerCase() === cls.category.toLowerCase(),
   );
   const CategoryIcon = category?.icon;
-
-  const otherClasses = classes
-    .filter(
-      (c) => c.sportCenter.name === cls.sportCenter.name && c.id !== cls.id,
-    )
-    .slice(0, 3);
 
   return (
     <div>

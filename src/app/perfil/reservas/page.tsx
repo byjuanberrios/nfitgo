@@ -1,16 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { LayoutGrid, Info } from "lucide-react";
 import BookingCard from "@/components/shared/BookingCard";
-import { bookings } from "@/data/bookings";
-
-import { BookingStatus } from "@/types";
+import { getBookings } from "@/services";
+import type { Booking, BookingStatus } from "@/types";
 
 export default function ReservasPage() {
   const [activeTab, setActiveTab] = useState<BookingStatus>("upcoming");
+  const [filtered, setFiltered] = useState<Booking[]>([]);
 
-  const filtered = bookings.filter((b) => b.status === activeTab);
+  useEffect(() => {
+    getBookings(activeTab).then(setFiltered);
+  }, [activeTab]);
 
   return (
     <div className="flex flex-col gap-6">

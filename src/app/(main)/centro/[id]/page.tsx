@@ -1,13 +1,13 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { MapPin, Mail, ExternalLink, Star } from "lucide-react";
-import { sportCenters } from "@/data/sportcenters";
-import { classes } from "@/data/classes";
+import { getSportCenters, getSportCenterById, getSportCenterClasses } from "@/services";
 import Tag from "@/components/shared/Tag";
 import ClassCard from "@/components/shared/ClassCard";
 
 export async function generateStaticParams() {
-  return sportCenters.map((sc) => ({ id: sc.id }));
+  const scs = await getSportCenters();
+  return scs.map((sc) => ({ id: sc.id }));
 }
 
 export default async function SportCenterPage({
@@ -16,10 +16,10 @@ export default async function SportCenterPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const sc = sportCenters.find((s) => s.id === id);
+  const sc = await getSportCenterById(id);
   if (!sc) notFound();
 
-  const scClasses = classes.filter((c) => c.sportCenter.id === sc.id);
+  const scClasses = await getSportCenterClasses(id);
 
   const socialLinks = [
     { label: "Sitio Web", href: sc.socials?.website },

@@ -2,8 +2,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { CalendarDays, Clock, CreditCard } from "lucide-react";
-import { classes } from "@/data/classes";
-import { categories } from "@/data/categories";
+import { getClassById, getCategories } from "@/services";
 import { formatScheduleDateLong } from "@/lib/dateUtils";
 
 const TRANSACTION_FEE = 200;
@@ -85,11 +84,12 @@ export default async function ExitoPage({
   const { classId } = await params;
   const { scheduleId } = await searchParams;
 
-  const cls = classes.find((c) => c.id === Number(classId));
+  const cls = await getClassById(Number(classId));
   if (!cls) notFound();
 
   const schedule = cls.schedules?.find((s) => s.id === Number(scheduleId));
-  const category = categories.find(
+  const allCategories = await getCategories();
+  const category = allCategories.find(
     (cat) => cat.name.toLowerCase() === cls.category.toLowerCase(),
   );
   const CategoryIcon = category?.icon;

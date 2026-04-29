@@ -1,13 +1,19 @@
 "use client";
 
-import { useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
-import { categories } from "@/data/categories";
+import { getCategories } from "@/services";
+import type { CategoryItem } from "@/types";
 import CategoryButton from "@/components/shared/CategoryButton";
 
 const SliderCategories = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [cats, setCats] = useState<CategoryItem[]>([]);
+
+  useEffect(() => {
+    getCategories().then(setCats);
+  }, []);
 
   const scroll = (direction: "left" | "right") => {
     if (!scrollRef.current) return;
@@ -44,7 +50,7 @@ const SliderCategories = () => {
           ref={scrollRef}
           className="flex flex-nowrap overflow-x-auto scrollbar-hide gap-1.5 md:gap-2.5 box-border"
         >
-          {categories.map((c, i) => (
+          {cats.map((c, i) => (
             <CategoryButton
               key={c.id}
               category={c}
