@@ -5,9 +5,14 @@ import { MapPin } from "lucide-react";
 import Button from "@/components/shared/Button";
 import Tag from "@/components/shared/Tag";
 import SliderCategories from "./SliderCategories";
-import { classes } from "@/data/classes";
+import type { ClassItem, CategoryItem } from "@/types";
 
-const FeaturedClassSlider = () => {
+type Props = {
+  classes: ClassItem[];
+  categories: CategoryItem[];
+};
+
+const FeaturedClassSlider = ({ classes, categories }: Props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const [isMounted, setIsMounted] = useState(true);
@@ -20,7 +25,7 @@ const FeaturedClassSlider = () => {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [isHovered, isMounted]);
+  }, [isHovered, isMounted, classes.length]);
 
   const currentClass = classes[currentIndex];
 
@@ -32,7 +37,7 @@ const FeaturedClassSlider = () => {
 
         {/* Categories */}
         <div className="relative z-40 max-w-full box-border">
-          <SliderCategories />
+          <SliderCategories categories={categories} />
         </div>
       </div>
     );
@@ -76,9 +81,6 @@ const FeaturedClassSlider = () => {
           <h2 className="font-semibold text-white text-3xl lg:text-5xl truncate">
             {currentClass.name}
           </h2>
-          {/* <p className="text-sm md:text-base text-white/90 max-w-[34ch] md:max-w-[42ch]">
-            {currentClass.description}
-          </p> */}
           <div className="flex gap-1.5 text-white/60 text-sm items-center">
             <MapPin size={16} className="text-brand-secondary" />
             <span>
@@ -108,7 +110,7 @@ const FeaturedClassSlider = () => {
       </div>
 
       {/* Categories */}
-      <SliderCategories />
+      <SliderCategories categories={categories} />
     </div>
   );
 };

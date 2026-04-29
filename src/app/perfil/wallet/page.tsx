@@ -1,5 +1,5 @@
 import { Wallet } from "lucide-react";
-import { walletBalance, walletTransactions } from "@/data/bookings";
+import { getWalletBalance, getWalletTransactions } from "@/services";
 
 const statusStyles: Record<string, string> = {
   pending: "bg-tag-gray text-white/80",
@@ -11,7 +11,12 @@ const statusLabels: Record<string, string> = {
   reversed: "Reversado",
 };
 
-export default function WalletPage() {
+export default async function WalletPage() {
+  const [balance, transactions] = await Promise.all([
+    getWalletBalance(),
+    getWalletTransactions(),
+  ]);
+
   return (
     <div className="flex flex-col gap-6">
       <div>
@@ -29,19 +34,19 @@ export default function WalletPage() {
         <div className="flex flex-col gap-0.5">
           <span className="text-xs text-white/50">Listo para usar</span>
           <span className="text-2xl font-semibold text-brand-primary">
-            ${walletBalance.ready.toLocaleString("es-CL")}
+            ${balance.ready.toLocaleString("es-CL")}
           </span>
         </div>
         <div className="flex flex-col gap-0.5">
           <span className="text-xs text-white/50">Monto total</span>
           <span className="text-2xl font-semibold text-brand-secondary">
-            ${walletBalance.total.toLocaleString("es-CL")}
+            ${balance.total.toLocaleString("es-CL")}
           </span>
         </div>
         <div className="flex flex-col gap-0.5">
           <span className="text-xs text-white/50">Pendiente</span>
           <span className="text-2xl font-semibold text-brand-primary">
-            ${walletBalance.pending.toLocaleString("es-CL")}
+            ${balance.pending.toLocaleString("es-CL")}
           </span>
         </div>
       </div>
@@ -70,11 +75,11 @@ export default function WalletPage() {
               </tr>
             </thead>
             <tbody>
-              {walletTransactions.map((tx, idx) => (
+              {transactions.map((tx, idx) => (
                 <tr
                   key={tx.id}
                   className={
-                    idx < walletTransactions.length - 1
+                    idx < transactions.length - 1
                       ? "border-b border-dark-muted/20"
                       : ""
                   }

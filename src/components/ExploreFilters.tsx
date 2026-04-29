@@ -9,11 +9,10 @@ import {
   X,
 } from "lucide-react";
 import CategoryButton from "@/components/shared/CategoryButton";
-import { categories } from "@/data/categories";
-
 import { ExploreFiltersProps } from "@/types";
 
 const FilterContent = ({
+  categories,
   selectedCategory,
   onSelectCategory,
 }: ExploreFiltersProps) => (
@@ -78,6 +77,7 @@ const FilterContent = ({
 );
 
 const ExploreFilters = ({
+  categories,
   selectedCategory,
   onSelectCategory,
 }: ExploreFiltersProps) => {
@@ -97,6 +97,7 @@ const ExploreFilters = ({
       {/* Desktop sidebar */}
       <aside className="hidden lg:flex flex-col gap-6 lg:gap-8 w-64 xl:w-72 shrink-0 sticky top-28 rounded-xl p-6 border-[0.5px] border-white/20">
         <FilterContent
+          categories={categories}
           selectedCategory={selectedCategory}
           onSelectCategory={onSelectCategory}
         />
@@ -108,7 +109,6 @@ const ExploreFilters = ({
         className="lg:hidden fixed bottom-6 right-4 z-40 flex items-center gap-2 bg-brand-primary text-black font-semibold text-sm px-4 py-3 rounded-full shadow-lg active:scale-95 transition-transform"
       >
         <SlidersHorizontal className="size-5" />
-        {/* Filtrar */}
         {activeCount > 0 && (
           <span className="bg-black/20 rounded-full size-5 flex items-center justify-center text-xs">
             {activeCount}
@@ -143,6 +143,7 @@ const ExploreFilters = ({
         </div>
         <div className="flex flex-col gap-6 p-5 overflow-y-auto max-h-[70dvh] pb-10">
           <FilterContent
+            categories={categories}
             selectedCategory={selectedCategory}
             onSelectCategory={onSelectCategory}
           />

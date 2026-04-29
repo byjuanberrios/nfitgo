@@ -90,6 +90,12 @@ export interface WalletTransaction {
   status: TransactionStatus;
 }
 
+export interface WalletBalance {
+  ready: number;
+  total: number;
+  pending: number;
+}
+
 export interface HeaderUser {
   name: string;
   avatar?: string;
@@ -149,6 +155,7 @@ export interface CategoryButtonProps {
 }
 
 export interface ExploreFiltersProps {
+  categories: CategoryItem[];
   selectedCategory: number | null;
   onSelectCategory: (id: number | null) => void;
 }

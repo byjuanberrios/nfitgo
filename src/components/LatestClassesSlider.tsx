@@ -4,10 +4,11 @@ import { useState, useRef, useEffect } from "react";
 import Button from "@/components/shared/Button";
 import ClassCard from "@/components/shared/ClassCard";
 import { Star } from "lucide-react";
+import type { ClassItem } from "@/types";
 
-import { classes } from "@/data/classes";
+type Props = { classes: ClassItem[] };
 
-const LatestClassesSlider = () => {
+const LatestClassesSlider = ({ classes }: Props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [totalDots, setTotalDots] = useState(classes.length);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -27,7 +28,7 @@ const LatestClassesSlider = () => {
     const ro = new ResizeObserver(updateDotCount);
     ro.observe(container);
     return () => ro.disconnect();
-  }, []);
+  }, [classes.length]);
 
   const scrollToIndex = (index: number) => {
     setCurrentIndex(index);
